@@ -1,0 +1,166 @@
+{
+    "name": "growhub-backend",
+    "description": "Node.js Backend mit Express, PostgreSQL und JSX-Dateien für Arduino-Messwerte mit Statistiken",
+    "prompt": "Erstelle ein Node.js Backend mit Express und PostgreSQL, bei dem alle Dateien als .jsx erstellt werden. Nutze die Tabellen 'measurements' und 'measurement_values' (siehe SQL unten). Implementiere Endpunkte POST /data (mit Header-Token Auth), GET /data/latest und GET /data/stats. Projektstruktur: routes/, controllers/, models/, server.jsx als Einstiegspunkt. Fehlerbehandlung, async/await für DB-Abfragen, Konfiguration über .env, bereit für Docker. Aggregiere Statistiken pro Sensor. Nutze keine Frontend-CSS, nur Backend. PostgreSQL muss lokal installiert sein, nicht in Docker. SQL Tabellen: CREATE TABLE IF NOT EXISTS measurements (id SERIAL PRIMARY KEY, created_at TIMESTAMP DEFAULT now()); CREATE TABLE IF NOT EXISTS measurement_values (id SERIAL PRIMARY KEY, measurement_id INT REFERENCES measurements(id) ON DELETE CASCADE, sensor_name TEXT NOT NULL, value NUMERIC NOT NULL); CREATE INDEX IF NOT EXISTS idx_measurements_created_at ON measurements(created_at); CREATE INDEX IF NOT EXISTS idx_measurement_values_measurement_id ON measurement_values(measurement_id); CREATE INDEX IF NOT EXISTS idx_measurement_values_sensor_name ON measurement_values(sensor_name);",
+    "frontend_requirements": {
+        "responsive_design": {
+            "description": "Das Frontend muss vollständig responsive sein und auf allen Geräten (Desktop, Tablet, Mobile) optimal funktionieren",
+            "bootstrap_grid": {
+                "description": "Verwende das Bootstrap 5 Grid-System mit Container, Row und Col-Klassen",
+                "breakpoints": [
+                    "xs (default): col-*",
+                    "sm (≥576px): col-sm-*", 
+                    "md (≥768px): col-md-*",
+                    "lg (≥992px): col-lg-*",
+                    "xl (≥1200px): col-xl-*",
+                    "xxl (≥1400px): col-xxl-*"
+                ],
+                "best_practices": [
+                    "Verwende Container für maximale Breite und zentrierte Ausrichtung",
+                    "Verwende Row für horizontale Spalten-Gruppen",
+                    "Verwende Col-Klassen für responsive Spalten-Breiten",
+                    "Nutze Col-12 für volle Breite auf kleinen Bildschirmen",
+                    "Verwende Col-md-* für Tablet-Ansicht",
+                    "Verwende Col-lg-* für Desktop-Ansicht",
+                    "Staple Spalten auf mobilen Geräten (Col-12)",
+                    "Verwende Gutter-Klassen (g-*) für Abstände zwischen Spalten"
+                ],
+                "examples": [
+                    "col-12 col-md-6 col-lg-4 (12 Spalten auf Mobile, 6 auf Tablet, 4 auf Desktop)",
+                    "col-12 col-lg-8 (volle Breite auf Mobile/Tablet, 8 Spalten auf Desktop)",
+                    "row g-3 (3 Spalten Grid mit Abstand)",
+                    "container-fluid (volle Breite) vs container (maximale Breite)"
+                ]
+            },
+            "mobile_first": {
+                "description": "Entwickle mit Mobile-First-Ansatz - beginne mit Mobile-Layout und erweitere für größere Bildschirme",
+                "approach": [
+                    "Starte mit Col-12 für alle Elemente",
+                    "Füge größere Breakpoints hinzu (col-md-*, col-lg-*)",
+                    "Teste auf verschiedenen Bildschirmgrößen",
+                    "Verwende Bootstrap's responsive Utilities"
+                ]
+            },
+            "components": {
+                "navbar": "Responsive Navbar mit Toggle-Button für Mobile",
+                "cards": "Responsive Cards die sich an Bildschirmgröße anpassen",
+                "tables": "Responsive Tables mit horizontalem Scroll auf Mobile",
+                "forms": "Responsive Forms mit Stack-Layout auf Mobile",
+                "buttons": "Responsive Buttons mit angemessener Größe"
+            }
+        },
+        "bootstrap_5_only": {
+            "description": "Verwende ausschließlich Bootstrap 5 Klassen - keine eigenen CSS-Styles",
+            "allowed": [
+                "Bootstrap 5 Utility-Klassen",
+                "Bootstrap 5 Component-Klassen", 
+                "Bootstrap 5 Grid-System",
+                "Bootstrap 5 Responsive Utilities"
+            ],
+            "forbidden": [
+                "Eigene CSS-Dateien",
+                "Inline-Styles",
+                "Benutzerdefinierte CSS-Klassen"
+            ]
+        }
+    },
+    "output_format": "files",
+    "postgresql_config": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "growhub",
+      "user": "postgres",
+      "password": "password",
+      "setup_instructions": [
+        "Installiere PostgreSQL lokal (nicht in Docker)",
+        "Erstelle eine Datenbank: CREATE DATABASE growhub;",
+        "Konfiguriere .env mit deinen PostgreSQL-Einstellungen",
+        "Stelle sicher, dass PostgreSQL auf localhost:5432 läuft"
+      ]
+    },
+    "files": [
+      {
+        "path": "server.jsx",
+        "type": "code/javascript"
+      },
+      {
+        "path": "routes/Data.jsx",
+        "type": "code/javascript"
+      },
+      {
+        "path": "controllers/DataController.jsx",
+        "type": "code/javascript"
+      },
+      {
+        "path": "models/DB.jsx",
+        "type": "code/javascript"
+      },
+      {
+        "path": "middleware/Auth.jsx",
+        "type": "code/javascript"
+      },
+      {
+        "path": "package.json",
+        "type": "text"
+      },
+      {
+        "path": "webpack.config.js",
+        "type": "code/javascript"
+      },
+      {
+        "path": ".babelrc",
+        "type": "text"
+      },
+      {
+        "path": "env.example",
+        "type": "text"
+      },
+      {
+        "path": "Dockerfile",
+        "type": "text"
+      },
+      {
+        "path": "docker-compose.yml",
+        "type": "text"
+      },
+      {
+        "path": ".gitignore",
+        "type": "text"
+      },
+      {
+        "path": "README.md",
+        "type": "text"
+      },
+      {
+        "path": "frontend/src/App.jsx",
+        "type": "code/javascript",
+        "responsive_requirements": "Responsive Navbar und Layout mit Bootstrap 5 Grid-System"
+      },
+      {
+        "path": "frontend/src/pages/Dashboard.jsx", 
+        "type": "code/javascript",
+        "responsive_requirements": "Responsive Dashboard mit Bootstrap 5 Grid und Cards"
+      },
+      {
+        "path": "frontend/src/pages/Stats.jsx",
+        "type": "code/javascript", 
+        "responsive_requirements": "Responsive Statistik-Seite mit Bootstrap 5 Grid"
+      },
+      {
+        "path": "frontend/src/styles/custom.scss",
+        "type": "code/scss",
+        "responsive_requirements": "Nur Bootstrap 5 Import - keine eigenen Styles"
+      },
+      {
+        "path": "frontend/webpack.config.js",
+        "type": "code/javascript",
+        "responsive_requirements": "Webpack-Konfiguration für responsive Frontend-Entwicklung"
+      },
+      {
+        "path": "frontend/package.json",
+        "type": "text",
+        "responsive_requirements": "Frontend-Dependencies für responsive Bootstrap 5 Entwicklung"
+      }
+    ]
+  }
+  

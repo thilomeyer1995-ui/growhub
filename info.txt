@@ -1,0 +1,28 @@
+curl -X POST http://localhost:3000/api/data \
+  -H "Authorization: Bearer your-secret-api-token-here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sensors": [
+      {"sensor_name": "temperature", "value": 23.5},
+      {"sensor_name": "humidity", "value": 65.2}
+    ]
+  }'
+
+
+
+http://localhost:3000/api/data/sensor/temperature?start_time=2024-01-01T00:00:00Z&end_time=2024-01-02T00:00:00Z&limit=1000
+
+Bisherige sensoren: 
+humidity, temperature, plant1_moisture, plant2_moisture, plant3_moisture, distance_sensor
+
+
+CREATE USER grow_hub_user WITH PASSWORD '@@hjlksdfz!,';
+
+CREATE DATABASE grow_hub OWNER grow_hub_user;
+
+GRANT ALL PRIVILEGES ON DATABASE grow_hub TO grow_hub_user;
+
+psql -U grow_hub_user -d grow_hub -h 127.0.0.1 -W
+
+
+TODO Route um die Zeit zu laden im konstruktor

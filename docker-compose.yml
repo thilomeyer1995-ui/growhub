@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # GrowHub Application (Frontend + Backend in einem Container)
+  # Note: Environment variables are set here for Docker.
+  # For local development, edit dist/.env after building.
+  growhub:
+    build: .
+    container_name: growhub-app
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_NAME=growhub
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - API_TOKEN=your-secret-api-token-here
+      - PORT=3000
+      - REACT_APP_API_URL=http://localhost:3000
+    ports:
+      - "3000:3000"  # Backend API
+      - "3001:3001"  # Frontend
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
