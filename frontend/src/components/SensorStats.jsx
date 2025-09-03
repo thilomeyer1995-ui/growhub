@@ -102,6 +102,9 @@ const SensorStats = ({ sensorName, title, icon, unit, color = '#2ecc71' }) => {
       return `${numValue.toFixed(1)}%`;
     } else if (sensorName === 'distance_sensor') {
       return `${numValue.toFixed(1)} cm`;
+    } else if (sensorName === 'light_sensor') {
+      // 0 = Licht an, 1 = Licht aus
+      return numValue === 0 ? 'an' : 'aus';
     }
     return numValue.toFixed(1);
   };
@@ -132,11 +135,22 @@ const SensorStats = ({ sensorName, title, icon, unit, color = '#2ecc71' }) => {
     }
   };
 
+  console.log("data.value");
+  console.log(sensorName);
+console.log(data.value);
   return (
     <div className="card shadow-sm h-100 bg-light text-dark border-secondary">
       <div className="card-body text-center">
         <div className="d-flex align-items-center justify-content-center mb-3">
-          <i className={`${icon} fs-1 me-3`} style={{ color: color }}></i>
+          <i
+            className={`${icon} fs-1 me-3`}
+            style={{
+              color:
+                sensorName === 'light_sensor'
+                  ? (data.value == 0 ? '#f1c40f' : '#adb5bd') // gelb für an, grau für aus
+                  : color
+            }}
+          ></i>
           <div>
             <h6 className="card-title mb-0 text-dark">{title}</h6>
             <small className="text-muted">{unit}</small>

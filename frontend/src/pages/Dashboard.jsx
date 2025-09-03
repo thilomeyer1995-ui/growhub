@@ -64,6 +64,16 @@ const Dashboard = () => {
               color="#9b59b6"
             />
           </div>
+          {/* Lichtsensor Kachel */}
+          <div className="col-12 col-md-6 col-lg-3">
+            <SensorStats
+              sensorName="light_sensor"
+              title="Lichtstatus"
+              icon="bi bi-lightbulb-fill"
+              unit="Licht an/aus"
+              color="#f1c40f"
+            />
+          </div>
         </div>
 
         {/* Sensor Charts */}
