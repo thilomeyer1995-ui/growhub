@@ -4,6 +4,8 @@ import './styles/custom.scss';
 import Dashboard from './pages/Dashboard';
 import Stats from './pages/Stats';
 
+import Livestream from './pages/Livestream';
+
 // Bootstrap JS importieren
 import * as bootstrap from 'bootstrap';
 function App() {
@@ -40,7 +42,7 @@ function App() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow border-bottom border-secondary">
           <div className="container-fluid">
             {/* Brand */}
-            <Link className="navbar-brand fw-bold text-primary" to="/">
+            <Link className="navbar-brand fw-bold text-white" to="/">
               <i className="bi bi-plant me-2"></i>GrowHub
             </Link>
 
@@ -86,6 +88,11 @@ function App() {
                       <i className="bi bi-graph-up me-3"></i>Statistik
                     </Link>
                   </li>
+                  <li className="nav-item mb-3">
+                    <Link className="nav-link text-light fw-semibold fs-5 py-3 px-3 rounded-3 hover-bg-primary transition-all" to="/livestream">
+                      <i className="bi bi-camera-video me-3"></i>Livestream
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -99,6 +106,9 @@ function App() {
                 <li className="nav-item">
                   <Link className="nav-link text-light fw-semibold hover-text-primary" to="/stats">Statistik</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-light fw-semibold hover-text-primary" to="/livestream">Livestream</Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -109,6 +119,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/stats" element={<Stats />} />
+            <Route path="/livestream" element={<Livestream />} />
           </Routes>
         </main>
       </div>
