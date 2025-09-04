@@ -79,7 +79,7 @@ const Dashboard = () => {
         {/* Sensor Charts */}
         <div className="row g-4">
           {/* Temperatur Chart */}
-          <div className="col-12 col-lg-6">
+          <div className="col-12">
             <SensorChart
               sensorName="temperature"
               title="Temperaturverlauf - Letzte 7 Tage"
@@ -88,7 +88,7 @@ const Dashboard = () => {
           </div>
 
           {/* Luftfeuchtigkeit Chart */}
-          <div className="col-12 col-lg-6">
+          <div className="col-12">
             <SensorChart
               sensorName="humidity"
               title="Luftfeuchtigkeitsverlauf - Letzte 7 Tage"
@@ -97,7 +97,7 @@ const Dashboard = () => {
           </div>
 
           {/* Bodenfeuchtigkeit Charts */}
-          <div className="col-12 col-lg-4">
+          <div className="col-12 ">
             <SensorChart
               sensorName="plant1_moisture"
               title="Pflanze 1 - Bodenfeuchtigkeit - Letzte 7 Tage"
@@ -105,7 +105,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="col-12 col-lg-4">
+          <div className="col-12 ">
             <SensorChart
               sensorName="plant2_moisture"
               title="Pflanze 2 - Bodenfeuchtigkeit - Letzte 7 Tage"
@@ -113,7 +113,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="col-12 col-lg-4">
+          <div className="col-12">
             <SensorChart
               sensorName="plant3_moisture"
               title="Pflanze 3 - Bodenfeuchtigkeit - Letzte 7 Tage"

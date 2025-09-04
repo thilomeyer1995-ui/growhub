@@ -135,9 +135,7 @@ const SensorStats = ({ sensorName, title, icon, unit, color = '#2ecc71' }) => {
     }
   };
 
-  console.log("data.value");
-  console.log(sensorName);
-console.log(data.value);
+
   return (
     <div className="card shadow-sm h-100 bg-light text-dark border-secondary">
       <div className="card-body text-center">
@@ -152,7 +150,12 @@ console.log(data.value);
             }}
           ></i>
           <div>
-            <h6 className="card-title mb-0 text-dark">{title}</h6>
+            <h6 className="card-title mb-0 text-dark" tyle={{
+              color:
+                sensorName === 'light_sensor'
+                  ? (data.value == 0 ? '#f1c40f' : '#adb5bd') // gelb für an, grau für aus
+                  : color
+            }}>{title}</h6>
             <small className="text-muted">{unit}</small>
           </div>
         </div>
