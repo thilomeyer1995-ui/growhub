@@ -109,13 +109,15 @@ const startServer = async () => {
     // Dynamically import database and routes modules after env vars are loaded
     const { initDatabase } = await import('./models/DB.jsx');
     const dataRoutesModule = await import('./routes/Data.jsx');
-    const dataRoutes = dataRoutesModule.default;
-    
-    // Setup API routes
-    app.use('/api', dataRoutes);
-    
-    // Initialize database tables and indexes
-    await initDatabase();
+  const dataRoutes = dataRoutesModule.default;
+  // VideoProxy importieren und einbinden
+  const videoProxyModule = await import('./routes/VideoProxy.jsx');
+  const videoProxyRoutes = videoProxyModule.default;
+  // Setup API routes
+  app.use('/api', dataRoutes);
+  app.use('/api', videoProxyRoutes);
+  // Initialize database tables and indexes
+  await initDatabase();
     
     // Start the server
     app.listen(PORT, () => {

@@ -100,13 +100,17 @@ app.use((req, res, next) => {
 // --- API-Routen --- //
 const startServer = async () => {
   try {
-    // DB + Routen erst importieren, wenn .env geladen ist
-    const { initDatabase } = await import('./models/DB.jsx');
-    const dataRoutesModule = await import('./routes/Data.jsx');
-    const dataRoutes = dataRoutesModule.default;
+  // DB + Routen erst importieren, wenn .env geladen ist
+  const { initDatabase } = await import('./models/DB.jsx');
+  const dataRoutesModule = await import('./routes/Data.jsx');
+  const dataRoutes = dataRoutesModule.default;
+  // VideoProxy-Route importieren und einbinden
+  const videoProxyModule = await import('./routes/VideoProxy.jsx');
+  const videoProxyRoutes = videoProxyModule.default;
 
-    // API unter /api
-    app.use('/api', dataRoutes);
+  // API unter /api
+  app.use('/api', dataRoutes);
+  app.use('/api', videoProxyRoutes);
 
     // API Info
     app.get('/api', (req, res) => {
